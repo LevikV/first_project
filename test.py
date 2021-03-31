@@ -1,5 +1,4 @@
 import telebot
-server.listen(port, address='0.0.0.0')
 bot = telebot.TeleBot('1798432712:AAFKD_GMpkCeFhyMFzm6Kg3gSBXABh_jix0')
 @bot.message_handler(commands=['start', 'help'])
 def send_welcome(message):
