@@ -8,5 +8,5 @@ def get_text_message(message):
     if message.text.lower() == 'привет':
         bot.send_message(message.from_user.id, 'Привет!')
     else:
-        bot.send_message(message.from_user.id, 'Не понимаю, что это значит,хм....')
+        bot.send_message(message.from_user.id, 'Не понимаю, что это значит,хм.....')
 bot.polling(none_stop=True)
