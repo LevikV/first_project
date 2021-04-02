@@ -21,6 +21,7 @@ def get_text_message(message):
 def iq_callback(query):
     bot.send_chat_action(query.message.chat.id, 'typing') #Показываем индикатор ввода клавиатуры
     data = query.data
+    # Порядок действий пользователь согласился
     if data.startswith('sog-1'):
         keyboard = telebot.types.InlineKeyboardMarkup()
         keyboard.row(
@@ -28,8 +29,9 @@ def iq_callback(query):
             telebot.types.InlineKeyboardButton('🔥Давай быстрее🔥', callback_data='get-anket')
         )
         bot.send_message(query.message.chat.id, 'Я рада 😍, что ты согласился держать в тайне наше общение)) Сохранить конфеденциальность для меня очень важно!')
-        bot.send_message(query.message.chat.id, 'Показать тебе моих хозяек?', reply_markup=keyboard)
+        bot.send_message(query.message.chat.id, 'Показать тебе моих хозяек, которые сидят дома?', reply_markup=keyboard)
         bot.edit_message_reply_markup(query.message.chat.id, query.message.message_id) #убираем клавиатуру
+    # Порядок действий пользователь отказался молчать
     elif data.startswith('sog-0'):
         keyboard = telebot.types.InlineKeyboardMarkup()
         keyboard.row(
@@ -37,6 +39,22 @@ def iq_callback(query):
             telebot.types.InlineKeyboardButton('Не обещаю', callback_data='sog-0')
         )
         bot.send_message(query.message.chat.id, 'Ммм, так нельзя)) но я как и моя хозяйка, не из стеснительных, спрошу еще раз)) Обещаешь никому не рассказывать про наше общение?', reply_markup=keyboard)
+        bot.edit_message_reply_markup(query.message.chat.id, query.message.message_id)  # убираем клавиатуру
+    # Порядок действий пользователь запросил анкеты
+    elif data.startswith('get-anket'):
+        keyboard = telebot.types.InlineKeyboardMarkup()
+        keyboard.row(
+            telebot.types.InlineKeyboardButton('1) Юля', callback_data='sog-1'),
+            telebot.types.InlineKeyboardButton('2) Танюша', callback_data='sog-0'),
+            telebot.types.InlineKeyboardButton('3) Евгения', callback_data='sog-0')
+        )
+        #Отправка нескольких изображений одним сообщением
+        bot.send_media_group(query.message.chat.id,
+                             [telebot.types.InputMediaPhoto('AgACAgIAAxkBAAP2YGbrEA1dh9-0sfVPcr_q4RyUL9MAAn2wMRu_XTlLQTM4AgJRuqSKwCmbLgADAQADAgADeQADCtMFAAEeBA'),
+                              telebot.types.InputMediaPhoto('AgACAgIAAxkBAAP8YGbrOjkZcieQziT4LY5w98odNgIAAoGwMRu_XTlLW9KK_Z4BV3KC1o2iLgADAQADAgADeQADLKQAAh4E'),
+                              telebot.types.InputMediaPhoto('AgACAgIAAxkBAAP4YGbrGexoPu3JEdGsY-yY9CEfK7EAAn6wMRu_XTlLQctKQx38o14AATxMoi4AAwEAAwIAA3kAA22ZAAIeBA')])
+        #
+        bot.send_message(query.message.chat.id, 'Выбери понравившуюся девушку и я дам тебе ее контакты❤️', reply_markup=keyboard)
         bot.edit_message_reply_markup(query.message.chat.id, query.message.message_id)  # убираем клавиатуру
 @bot.message_handler(content_types=['photo'])
 #Получение id фото
