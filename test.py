@@ -24,10 +24,10 @@ def iq_callback(query):
     if data.startswith('sog-1'):
         keyboard = telebot.types.InlineKeyboardMarkup()
         keyboard.row(
-            telebot.types.InlineKeyboardButton('Конечно', callback_data='get-anket'),
-            telebot.types.InlineKeyboardButton('Давай быстрее', callback_data='get-anket')
+            telebot.types.InlineKeyboardButton('😍Конечно😍', callback_data='get-anket'),
+            telebot.types.InlineKeyboardButton('🔥Давай быстрее🔥', callback_data='get-anket')
         )
-        bot.send_message(query.message.chat.id, 'Я рада, что ты согласился держать в тайне наше общение)) Сохранить конфеденциальность для меня очень важно!')
+        bot.send_message(query.message.chat.id, 'Я рада 😍, что ты согласился держать в тайне наше общение)) Сохранить конфеденциальность для меня очень важно!')
         bot.send_message(query.message.chat.id, 'Показать тебе моих хозяек?', reply_markup=keyboard)
         bot.edit_message_reply_markup(query.message.chat.id, query.message.message_id) #убираем клавиатуру
     elif data.startswith('sog-0'):
@@ -39,6 +39,9 @@ def iq_callback(query):
         bot.send_message(query.message.chat.id, 'Ммм, так нельзя)) но я как и моя хозяйка, не из стеснительных, спрошу еще раз)) Обещаешь никому не рассказывать про наше общение?', reply_markup=keyboard)
         bot.edit_message_reply_markup(query.message.chat.id, query.message.message_id)  # убираем клавиатуру
 @bot.message_handler(content_types=['photo'])
-def getidphoto (photo):
-    bot.send_message(photo.message.chat.id, 'Ты загрузил фотка)))')
+#Получение id фото
+def photoid(message):
+   photo = max(message.photo, key=lambda x: x.height) #Получаем максимальный размер изображения
+   bot.send_message(message.chat.id, photo.file_id)
+
 bot.polling(none_stop=True)
