@@ -9,7 +9,7 @@ def send_welcome(message):
         telebot.types.InlineKeyboardButton('Согласен', callback_data='sog-1'),
         telebot.types.InlineKeyboardButton('Не согласен', callback_data='sog-0')
     )
-    bot.send_message(message.from_user.id, 'Привет, я бот Яна! Прежде, чем пообщаться с моей хозяйкой, ты должен пообещать никому об этом не рассказывать)',reply_markup=keyboard)
+    bot.send_message(message.from_user.id, 'Привет, я бот Яна🙂 Прежде, чем пообщаться с моей хозяйкой👩🏼, ты должен пообещать никому об этом не рассказывать)🥰',reply_markup=keyboard)
 @bot.message_handler(content_types=['text'])
 def get_text_message(message):
     if message.text.lower() == 'привет':
@@ -44,9 +44,9 @@ def iq_callback(query):
     elif data.startswith('get-anket'):
         keyboard = telebot.types.InlineKeyboardMarkup()
         keyboard.row(
-            telebot.types.InlineKeyboardButton('1) Юля', callback_data='sog-1'),
-            telebot.types.InlineKeyboardButton('2) Танюша', callback_data='sog-0'),
-            telebot.types.InlineKeyboardButton('3) Евгения', callback_data='sog-0')
+            telebot.types.InlineKeyboardButton('1) Юля', callback_data='get-id121'),
+            telebot.types.InlineKeyboardButton('2) Танюша', callback_data='get-id4864'),
+            telebot.types.InlineKeyboardButton('3) Евгения', callback_data='get-id2422')
         )
         #Отправка нескольких изображений одним сообщением
         bot.send_media_group(query.message.chat.id,
@@ -55,6 +55,35 @@ def iq_callback(query):
                               telebot.types.InputMediaPhoto('AgACAgIAAxkBAAP4YGbrGexoPu3JEdGsY-yY9CEfK7EAAn6wMRu_XTlLQctKQx38o14AATxMoi4AAwEAAwIAA3kAA22ZAAIeBA')])
         #
         bot.send_message(query.message.chat.id, 'Выбери понравившуюся девушку и я дам тебе ее контакты❤️', reply_markup=keyboard)
+        bot.edit_message_reply_markup(query.message.chat.id, query.message.message_id)  # убираем клавиатуру
+        # http://bolkond.com/3yKk?sub1=tt&sub2=tb&sub3=sub3&sub4=sub4&sub5=sub5
+        # Первая девушка
+    elif data.startswith('get-id121'):
+        keyboard = telebot.types.InlineKeyboardMarkup()
+        keyboard.row(
+            telebot.types.InlineKeyboardButton('❤Посмотреть анкету Юлечки❤', url='https://clck.ru/U6P5t'))
+        # Отправка нескольких изображений одним сообщением
+        bot.send_message(query.message.chat.id, 'К сожалению Юлечка не указал свой Телеграм профиль. Но ты можешь посмотреть ее анкету и телефон на нашем сайте️',
+                         reply_markup=keyboard)
+        bot.edit_message_reply_markup(query.message.chat.id, query.message.message_id)  # убираем клавиатуру
+    # Вторая девушка
+    elif data.startswith('get-id4864'):
+        keyboard = telebot.types.InlineKeyboardMarkup()
+        keyboard.row(
+            telebot.types.InlineKeyboardButton('❤Посмотреть Танюшкину анкету❤', url='https://clck.ru/U6P5t'))
+        # Отправка нескольких изображений одним сообщением
+        bot.send_message(query.message.chat.id, 'К сожалению Танечка не указал свой Телеграм профиль. Но ты можешь посмотреть ее анкету и телефон на нашем сайте️',
+                         reply_markup=keyboard)
+        bot.edit_message_reply_markup(query.message.chat.id, query.message.message_id)  # убираем клавиатуру
+    # Третья девушка
+    elif data.startswith('get-id2422'):
+        keyboard = telebot.types.InlineKeyboardMarkup()
+        keyboard.row(
+            telebot.types.InlineKeyboardButton('❤Посмотреть Женечкину анкету❤', url='https://clck.ru/U6P5t'))
+        # Отправка нескольких изображений одним сообщением
+        bot.send_message(query.message.chat.id,
+                         'К сожалению Евгения не указал свой Телеграм профиль. Но ты можешь посмотреть ее анкету и телефон на нашем сайте️',
+                         reply_markup=keyboard)
         bot.edit_message_reply_markup(query.message.chat.id, query.message.message_id)  # убираем клавиатуру
 @bot.message_handler(content_types=['photo'])
 #Получение id фото
