@@ -1,6 +1,53 @@
 import telebot
 bot = telebot.TeleBot('1798432712:AAFKD_GMpkCeFhyMFzm6Kg3gSBXABh_jix0')
+# Вывод в консоль чтобы получить нужный id чата или еще какую либо инфо
+import logging
+logger = telebot.logger
+telebot.logger.setLevel(logging.DEBUG)
+#
+# Отправка постов для нашего канала
+#
+@bot.message_handler(commands=['sendA'])
+def send_welcome(message):
+    bot.send_chat_action(message.chat.id, 'typing')  # Показываем индикатор ввода клавиатуры
+    keyboard = telebot.types.InlineKeyboardMarkup()
+    keyboard.row(
+        telebot.types.InlineKeyboardButton('❤Посмотреть анкету❤', url='https://clck.ru/U6P5t'))
+    bot.send_photo('-1001199076982', 'AgACAgIAAxkBAAP2YGbrEA1dh9-0sfVPcr_q4RyUL9MAAn2wMRu_XTlLQTM4AgJRuqSKwCmbLgADAQADAgADeQADCtMFAAEeBA', caption='💃Юлечка, 26 лет, ищу парня, только серъезные отношения❤',reply_markup=keyboard)
+    #bot.send_message('-1001199076982', 'Сообщение для канала Дружбы и общения')
+    # Отправляем сообщение об успешной отправке сообщения в канал
+    bot.send_message(message.from_user.id, 'Сообщение отправлено в канал Дружбы и общения')
+@bot.message_handler(commands=['sendB'])
+def send_welcome(message):
+    bot.send_chat_action(message.chat.id, 'typing')  # Показываем индикатор ввода клавиатуры
+    keyboard = telebot.types.InlineKeyboardMarkup()
+    keyboard.row(
+        telebot.types.InlineKeyboardButton('❤Посмотреть анкету❤', url='https://clck.ru/U6P5t'))
+    bot.send_photo('-1001199076982', 'AgACAgIAAxkBAAP8YGbrOjkZcieQziT4LY5w98odNgIAAoGwMRu_XTlLW9KK_Z4BV3KC1o2iLgADAQADAgADeQADLKQAAh4E', caption='💋Оля💋, 32 года, встречи👫, свидания💐, романтика🥰',reply_markup=keyboard)
+    #bot.send_message('-1001199076982', 'Сообщение для канала Дружбы и общения')
+    # Отправляем сообщение об успешной отправке сообщения в канал
+    bot.send_message(message.from_user.id, 'Сообщение отправлено в канал Дружбы и общения')
+@bot.message_handler(commands=['sendC'])
+def send_welcome(message):
+    bot.send_chat_action(message.chat.id, 'typing')  # Показываем индикатор ввода клавиатуры
+    keyboard = telebot.types.InlineKeyboardMarkup()
+    keyboard.row(
+        telebot.types.InlineKeyboardButton('❤Посмотреть анкету❤', url='https://clck.ru/U6P5t'))
+    bot.send_photo('-1001199076982', 'AgACAgIAAxkBAAP4YGbrGexoPu3JEdGsY-yY9CEfK7EAAn6wMRu_XTlLQctKQx38o14AATxMoi4AAwEAAwIAA3kAA22ZAAIeBA', caption='❤Евгения❤, 21 годик, сначала пообщаться😉 а потом может быть встречаться🥰',reply_markup=keyboard)
+    #bot.send_message('-1001199076982', 'Сообщение для канала Дружбы и общения')
+    # Отправляем сообщение об успешной отправке сообщения в канал
+    bot.send_message(message.from_user.id, 'Сообщение отправлено в канал Дружбы и общения')
 
+
+
+
+#
+
+
+
+#
+# Обработка команды /START
+#
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
     bot.send_chat_action(message.chat.id, 'typing') #Показываем индикатор ввода клавиатуры
